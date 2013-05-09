@@ -17,4 +17,7 @@
     </string-array>
 
     <string name="title_activity_web">WebActivity</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
