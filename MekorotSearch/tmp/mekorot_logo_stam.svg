@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1052.3622"
+   height="744.09448"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="mekorot_logo_stam.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient5279"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5281" />
+    </linearGradient>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path5557"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <linearGradient
+       id="linearGradient5540"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5542" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5530"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5532" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5326"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#7c7167;stop-opacity:1;"
+         offset="0"
+         id="stop5328" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3886"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#7c7167;stop-opacity:1;"
+         offset="0"
+         id="stop3888" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3854"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1;"
+         offset="0"
+         id="stop3856" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5665"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1;"
+         offset="0"
+         id="stop5667" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5657"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000080;stop-opacity:1;"
+         offset="0"
+         id="stop5659" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5651"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000080;stop-opacity:1;"
+         offset="0"
+         id="stop5653" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5607"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1;"
+         offset="0"
+         id="stop5609" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5599"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1;"
+         offset="0"
+         id="stop5601" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5573"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ff00ff;stop-opacity:1;"
+         offset="0"
+         id="stop5575" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5563"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#008000;stop-opacity:1;"
+         offset="0"
+         id="stop5565" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5500"
+       osb:paint="gradient">
+      <stop
+         style="stop-color:#595c60;stop-opacity:1;"
+         offset="0"
+         id="stop5502" />
+      <stop
+         style="stop-color:#595c60;stop-opacity:0;"
+         offset="1"
+         id="stop5504" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5494"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#aa44b2;stop-opacity:1;"
+         offset="0"
+         id="stop5496" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5482"
+       osb:paint="gradient">
+      <stop
+         style="stop-color:#ff6600;stop-opacity:1;"
+         offset="0"
+         id="stop5484" />
+      <stop
+         style="stop-color:#ff6600;stop-opacity:0;"
+         offset="1"
+         id="stop5486" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5440"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffff35;stop-opacity:1;"
+         offset="0"
+         id="stop5442" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5434"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffff4f;stop-opacity:1;"
+         offset="0"
+         id="stop5436" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5400"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ff5b4f;stop-opacity:1;"
+         offset="0"
+         id="stop5402" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5390"
+       osb:paint="gradient">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5392" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop5394" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5382"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5384" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5207"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ff3229;stop-opacity:1;"
+         offset="0"
+         id="stop5209" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5199"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ff5b4f;stop-opacity:1;"
+         offset="0"
+         id="stop5201" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5651-1"
+       id="linearGradient5655-8"
+       x1="-583.0343"
+       y1="198.3802"
+       x2="-556.9657"
+       y2="198.3802"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient5651-1"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000080;stop-opacity:1;"
+         offset="0"
+         id="stop5653-3" />
+    </linearGradient>
+    <linearGradient
+       y2="198.3802"
+       x2="-556.9657"
+       y1="198.3802"
+       x1="-583.0343"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3065-4"
+       xlink:href="#linearGradient5651-1-2"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient5651-1-2"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000080;stop-opacity:1;"
+         offset="0"
+         id="stop5653-3-5" />
+    </linearGradient>
+    <linearGradient
+       y2="198.3802"
+       x2="-556.9657"
+       y1="198.3802"
+       x1="-583.0343"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3065-44"
+       xlink:href="#linearGradient5651-1-7"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient5651-1-7"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000080;stop-opacity:1;"
+         offset="0"
+         id="stop5653-3-6" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5279"
+       id="linearGradient5283"
+       x1="132.29162"
+       y1="158.80016"
+       x2="245.92059"
+       y2="158.80016"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="459.14779"
+     inkscape:cy="405.71429"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="744"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Background">
+    <path
+       sodipodi:type="arc"
+       style="fill:#0000ff;fill-opacity:1;stroke:#7c7167;stroke-width:0.35433072;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5631-9"
+       sodipodi:cx="-570"
+       sodipodi:cy="198.3802"
+       sodipodi:rx="12.857142"
+       sodipodi:ry="11.428572"
+       d="m -557.14286,198.3802 a 12.857142,11.428572 0 1 1 -25.71428,0 12.857142,11.428572 0 1 1 25.71428,0 z"
+       transform="matrix(1.1117668,0,0,1.2581727,1407.7146,13.879803)"
+       inkscape:export-filename="/home/oren/Desktop/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0000ff;fill-opacity:1;stroke:#7c7167;stroke-width:0.35433072;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5631-5-3"
+       sodipodi:cx="-570"
+       sodipodi:cy="198.3802"
+       sodipodi:rx="12.857142"
+       sodipodi:ry="11.428572"
+       d="m -557.14286,198.3802 a 12.857142,11.428572 0 1 1 -25.71428,0 12.857142,11.428572 0 1 1 25.71428,0 z"
+       transform="matrix(1.1117668,0,0,1.2581727,1407.706,-23.169647)"
+       inkscape:export-filename="/home/oren/Desktop/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341" />
+    <text
+       xml:space="preserve"
+       style="font-size:181.86965942px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;font-family:Stam Sefarad CLM;-inkscape-font-specification:Stam Sefarad CLM Medium"
+       x="252.17604"
+       y="218.03322"
+       id="text3070-5"
+       sodipodi:linespacing="125%"
+       transform="scale(1.092847,0.91504116)"
+       inkscape:export-filename="/home/oren/Desktop/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341"><tspan
+         sodipodi:role="line"
+         id="tspan3072-6"
+         x="252.17604"
+         y="218.03322">מקורות</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff6600;fill-opacity:1;stroke:#7c7167;stroke-width:0.35433072;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5631-5-4-0"
+       sodipodi:cx="-570"
+       sodipodi:cy="198.3802"
+       sodipodi:rx="12.857142"
+       sodipodi:ry="11.428572"
+       d="m -557.14286,198.3802 a 12.857142,11.428572 0 1 1 -25.71428,0 12.857142,11.428572 0 1 1 25.71428,0 z"
+       transform="matrix(1.1117668,0,0,1.2581727,1216.2776,-164.31252)"
+       inkscape:export-filename="/home/oren/Desktop/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff00ff;fill-opacity:1;stroke:#7c7167;stroke-width:0.35433072;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5631-5-2-2"
+       sodipodi:cx="-570"
+       sodipodi:cy="198.3802"
+       sodipodi:rx="12.857142"
+       sodipodi:ry="11.428572"
+       d="m -557.14286,198.3802 a 12.857142,11.428572 0 1 1 -25.71428,0 12.857142,11.428572 0 1 1 25.71428,0 z"
+       transform="matrix(1.1117668,0,0,1.2581727,1048.5633,-163.45537)"
+       inkscape:export-filename="/home/oren/Desktop/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0000ff;fill-opacity:1;stroke:#7c7167;stroke-width:0.35433072;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5631-9-0"
+       sodipodi:cx="-570"
+       sodipodi:cy="198.3802"
+       sodipodi:rx="12.857142"
+       sodipodi:ry="11.428572"
+       d="m -557.14286,198.3802 a 12.857142,11.428572 0 1 1 -25.71428,0 12.857142,11.428572 0 1 1 25.71428,0 z"
+       transform="matrix(1.1117668,0,0,1.2581727,1498.0907,401.16551)"
+       inkscape:export-filename="/home/oren/Dropbox/projects/mekorot/oren_dev/icons/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0000ff;fill-opacity:1;stroke:#7c7167;stroke-width:0.35433072;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5631-5-3-6"
+       sodipodi:cx="-570"
+       sodipodi:cy="198.3802"
+       sodipodi:rx="12.857142"
+       sodipodi:ry="11.428572"
+       d="m -557.14286,198.3802 a 12.857142,11.428572 0 1 1 -25.71428,0 12.857142,11.428572 0 1 1 25.71428,0 z"
+       transform="matrix(1.1117668,0,0,1.2581727,1498.0821,364.11606)"
+       inkscape:export-filename="/home/oren/Dropbox/projects/mekorot/oren_dev/icons/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341" />
+    <text
+       xml:space="preserve"
+       style="font-size:170.19088745px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;font-family:Stam Sefarad CLM;-inkscape-font-specification:Stam Sefarad CLM Medium"
+       x="313.36996"
+       y="682.8526"
+       id="text3070-5-4"
+       sodipodi:linespacing="125%"
+       transform="scale(1.1678399,0.85628176)"
+       inkscape:export-filename="/home/oren/Dropbox/projects/mekorot/oren_dev/icons/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341"><tspan
+         sodipodi:role="line"
+         id="tspan3072-6-5"
+         x="313.36996"
+         y="682.8526">מקורות</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="fill:#d45500;fill-opacity:1;stroke:#7c7167;stroke-width:0.35433072;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5631-5-4-0-3"
+       sodipodi:cx="-570"
+       sodipodi:cy="198.3802"
+       sodipodi:rx="12.857142"
+       sodipodi:ry="11.428572"
+       d="m -557.14286,198.3802 a 12.857142,11.428572 0 1 1 -25.71428,0 12.857142,11.428572 0 1 1 25.71428,0 z"
+       transform="matrix(1.1117668,0,0,1.2581727,1306.6537,228.97319)"
+       inkscape:export-filename="/home/oren/Dropbox/projects/mekorot/oren_dev/icons/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff00ff;fill-opacity:1;stroke:#7c7167;stroke-width:0.35433072;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path5631-5-2-2-6"
+       sodipodi:cx="-570"
+       sodipodi:cy="198.3802"
+       sodipodi:rx="12.857142"
+       sodipodi:ry="11.428572"
+       d="m -557.14286,198.3802 a 12.857142,11.428572 0 1 1 -25.71428,0 12.857142,11.428572 0 1 1 25.71428,0 z"
+       transform="matrix(1.1117668,0,0,1.2581727,1138.9394,229.83034)"
+       inkscape:export-filename="/home/oren/Dropbox/projects/mekorot/oren_dev/icons/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341" />
+    <text
+       xml:space="preserve"
+       style="font-size:151.6083374px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#d45500;fill-opacity:1;stroke:none;font-family:Stam Sefarad CLM;-inkscape-font-specification:Stam Sefarad CLM Medium"
+       x="234.1617"
+       y="574.97803"
+       id="text3060-9"
+       sodipodi:linespacing="125%"
+       transform="scale(0.97844313,1.0220318)"
+       inkscape:export-filename="/home/oren/Dropbox/projects/mekorot/oren_dev/icons/mekorot_logo_stam.png"
+       inkscape:export-xdpi="18.65341"
+       inkscape:export-ydpi="18.65341"><tspan
+         sodipodi:role="line"
+         id="tspan3062-6"
+         x="234.1617"
+         y="574.97803"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#d45500;font-family:David CLM;-inkscape-font-specification:David CLM Bold Italic">&lt;&lt;</tspan></text>
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-308.2677)">
+    <rect
+       style="opacity:1;fill:none;stroke:none;stroke-width:0.1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3884"
+       width="628.57141"
+       height="222.85715"
+       x="-980"
+       y="663.79077" />
+    <rect
+       style="fill:none;stroke:none"
+       id="rect5332"
+       width="262.85715"
+       height="291.42856"
+       x="-782.85712"
+       y="-30.191233"
+       transform="translate(0,308.2677)" />
+    <rect
+       style="fill:none;stroke:none"
+       id="rect5334"
+       width="37.142857"
+       height="128.57143"
+       x="-877.14288"
+       y="35.523052"
+       transform="translate(0,308.2677)" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect5336"
+       width="588.57141"
+       height="371.42856"
+       x="-897.14282"
+       y="346.64789" />
+  </g>
+</svg>
