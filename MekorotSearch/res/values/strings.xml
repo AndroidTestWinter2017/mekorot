@@ -2,7 +2,19 @@
 <resources>
 
     <string name="app_name">Mekorot Search</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="book_text">חיבור:</string>
+    <string name="search_button">חיפוש</string>
+    <string name="path_text">נתיב:</string>
+    <string name="mekorot_name">מקורות</string>
 
+    <string-array name="ALL_BOOKS_HEB">
+        <item>"תנ\"ך""</item>
+        <item>"משנה תורה""</item>
+        <item>"תלמוד בבלי""</item>
+        <item>"תלמוד ירושלמי""</item>
+        <item>"משנה""</item>
+    </string-array>
+
+    <string name="title_activity_web">WebActivity</string>
 </resources>
