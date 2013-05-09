@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mekorot Search</string>
+    <string name="app_name">חיפוש מקורות</string>
     <string name="action_settings">הגדרות</string>
     <string name="book_text">חיבור:</string>
     <string name="search_button">חיפוש</string>
