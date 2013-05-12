@@ -27,7 +27,8 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:imeOptions="actionNext"/>
 	    <TextView 
         android:text="@string/book_text"
         android:layout_width="wrap_content"
@@ -45,7 +46,9 @@
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="right"/>
+        android:gravity="right"
+        android:singleLine="true"
+        android:imeOptions="actionSearch"/>
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
