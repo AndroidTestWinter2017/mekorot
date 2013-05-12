@@ -94,8 +94,13 @@ public class SearchActivity extends Activity implements TextWatcher {
 		switch(view.getId()) {
 		case R.id.book_delete_button:
 			bookView.setText("");
+			pathView.setText("");
+			bookView.requestFocus();
+			break;
 		case R.id.path_delete_button:
 			pathView.setText("");
+			pathView.requestFocus();
+			break;
 		}
 	}
 
