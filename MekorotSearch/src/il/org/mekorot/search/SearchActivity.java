@@ -90,5 +90,13 @@ public class SearchActivity extends Activity implements TextWatcher {
 		intent.putExtra(URL, "http://www.mechon-mamre.org/i/7611n.htm");
 		startActivity(intent);
 	}
+	public void deleteButtonPressed(View view) {
+		switch(view.getId()) {
+		case R.id.book_delete_button:
+			bookView.setText("");
+		case R.id.path_delete_button:
+			pathView.setText("");
+		}
+	}
 
 }
