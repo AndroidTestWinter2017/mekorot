@@ -15,42 +15,62 @@ import android.widget.MultiAutoCompleteTextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SearchActivity extends Activity implements TextWatcher {
-	static final String[] BOOKS = new String[] {"בראשית", "שמות", "ויקרא", "במדבר", "דברים"};
-	static final String[] CHAPTERS_1 = new String[] {"פרק א", "פרק ב"};
-	static final String[] CHAPTERS_2 = new String[] {"פרק א", "פרק ב", "פרק ג", "פרק ד"};
-	static final String[] CHAPTERS_3 = new String[] {"פרק א", "פרק ב", "פרק ג", "פרק ד", "פרק ה", "פרק ו"};
-	static final String[] CHAPTERS_4 = new String[] {"פרק א", "פרק ב", "פרק ג", "פרק ד", "פרק ה", "פרק ו", "פרק ז", "פרק ח"};
-	static final String[] CHAPTERS_5 = new String[] {"פרק א", "פרק ב", "פרק ג", "פרק ד", "פרק ה", "פרק ו", "פרק ז", "פרק ח", "פרק ט", "פרק י"};
 	public static final String URL = "il.org.mekorot.URL";
 	private static final String SEPARATOR = ",";
 	private AutoCompleteTextView bookView;
 	private MultiAutoCompleteTextView pathView;
-	private ArrayAdapter<String> adapter1;
-	private ArrayAdapter<String> adapter2;
+	private ArrayAdapter<String> pathAdapter;
+	private ArrayAdapter<String> emptyAdapter;
+	/**
+	 * The book that was chosen by the user
+	 */
+	private Book book = BookRepository.getEmptyBook();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 		
-		//getActionBar().setDisplayShowTitleEnabled(false); // requires use of API level 11, see @TargetApi annotation above
-		
 		bookView = (AutoCompleteTextView) findViewById(R.id.book);
 		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
+		
+		emptyAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, new String[]{});
 		
 		// setting the adapter for the book textview
 		ArrayAdapter<String> bookAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.ALL_BOOKS_HEB));
 		bookView.setAdapter(bookAdapter);
 		
-		adapter1 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, BOOKS);
-//		adapter2 = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_dropdown_item_1line, CHAPTERS_1);
+		addBookViewTextChangedListener();
 		
-		pathView.setAdapter(adapter1);
+		// adapter of pathView is determined dynamically based on the book chosen and the current path
         pathView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         pathView.addTextChangedListener(this);
 	}
+
+	private void addBookViewTextChangedListener() {
+		bookView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				updateBook();
+			}
+		});
+		
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -58,16 +78,28 @@ public class SearchActivity extends Activity implements TextWatcher {
 		return true;
 	}
 	@Override
-	public void afterTextChanged(Editable s) {
-		String input = pathView.getText().toString();
-		
-		int numberOfCommas = input.length() - input.replace(",", "").length();
-		
-		if(numberOfCommas == 0)
-			pathView.setAdapter(adapter1);
-		else if(numberOfCommas == 1)
-			pathView.setAdapter(adapter2);		 
+	public void afterTextChanged(Editable s) {		 
 	}
+	/**
+	 * Ask the book repository for a book corresponding to the text
+	 * entered in the book view.
+	 */
+	private void updateBook() {
+		String bookName = bookView.getText().toString();
+		book = BookRepository.getBook(bookName);
+		
+		if(BookRepository.isEmptyBook(book)) {
+			pathAdapter = emptyAdapter;
+			pathView.setAdapter(pathAdapter);
+			return;
+		}
+		
+		// update path adapter
+		pathAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, book.getChildren(new String[]{bookName}));
+		pathView.setAdapter(pathAdapter);
+	}
+
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
