@@ -25,7 +25,7 @@
         android:id="@+id/book_delete_button"
    		android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:src="@android:drawable/ic_delete"
+    	android:src="@drawable/delete_icon4"
     	style="?android:attr/borderlessButtonStyle"
     	android:onClick="deleteButtonPressed"/>
 	    <AutoCompleteTextView 
@@ -52,7 +52,7 @@
         android:id="@+id/path_delete_button"
    		android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:src="@android:drawable/ic_delete"
+    	android:src="@drawable/delete_icon4"
     	style="?android:attr/borderlessButtonStyle"
     	android:onClick="deleteButtonPressed"/>
        <MultiAutoCompleteTextView 
