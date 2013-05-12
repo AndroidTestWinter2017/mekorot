@@ -32,7 +32,7 @@ public class SearchActivity extends Activity implements TextWatcher {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 		
-		getActionBar().setDisplayShowTitleEnabled(false); // requires use of API level 11, see @TargetApi annotation above
+		//getActionBar().setDisplayShowTitleEnabled(false); // requires use of API level 11, see @TargetApi annotation above
 		
 		bookView = (AutoCompleteTextView) findViewById(R.id.book);
 		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
