@@ -26,11 +26,12 @@
         android:layout_width="0px"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:gravity="right"/>
+        android:gravity="right"
+        android:singleLine="true"/>
 	    <TextView 
+        android:text="@string/book_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/book_text"
         android:textSize="18sp"/>
      </LinearLayout>
     
@@ -39,7 +40,8 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        android:paddingBottom="15dip">
-       <MultiAutoCompleteTextView android:id="@+id/path"
+       <MultiAutoCompleteTextView 
+        android:id="@+id/path"
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:layout_weight="1"
