@@ -1,15 +1,17 @@
 package il.org.mekorot.search.test;
 
-import static org.junit.Assert.*;
 import il.org.mekorot.search.BookRepository;
+import android.test.AndroidTestCase;
 
-import org.junit.Test;
-
-public class BookRepositoryTest {
-
-	@Test
-	public void test() {
-		assertEquals(1, BookRepository.getNumberOfBooks());
+public class BookRepositoryTest extends AndroidTestCase {
+	
+	public void setUp() {
+		BookRepository.setTestingMode(true);
 	}
-
+	public void tearDown() {
+		BookRepository.setTestingMode(false);
+	}
+	public void test() {
+		assertEquals(2, BookRepository.getNumberOfBooks());
+	}
 }
