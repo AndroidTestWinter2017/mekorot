@@ -14,7 +14,8 @@ public class ResultActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result);
-		getActionBar().hide();
+		if(android.os.Build.VERSION.SDK_INT >= 11)
+			getActionBar().hide();
 		String url = getIntent().getStringExtra(SearchActivity.URL);
 		WebView webview = (WebView)findViewById(R.id.webview);
 		
