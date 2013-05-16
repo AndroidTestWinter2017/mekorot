@@ -21,29 +21,29 @@ public class SearchActivity extends Activity implements TextWatcher {
 	private MultiAutoCompleteTextView pathView;
 	private ArrayAdapter<String> pathAdapter;
 	private ArrayAdapter<String> emptyAdapter;
+	private BookRepository bookRepository;
 	/**
 	 * The book that was chosen by the user
 	 */
-	private Book book = BookRepository.getEmptyBook();
+	private Book book;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 		
-		bookView = (AutoCompleteTextView) findViewById(R.id.book);
-		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
-		
+		bookRepository = BookRepository.instance(this);
+		book = bookRepository.getEmptyBook();
 		emptyAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, new String[]{});
 		
-		// setting the adapter for the book textview
+		bookView = (AutoCompleteTextView) findViewById(R.id.book);
 		ArrayAdapter<String> bookAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.ALL_BOOKS_HEB));
 		bookView.setAdapter(bookAdapter);
-		
 		addBookViewTextChangedListener();
 		
 		// adapter of pathView is determined dynamically based on the book chosen and the current path
+		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
         pathView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         pathView.addTextChangedListener(this);
 	}
@@ -86,9 +86,9 @@ public class SearchActivity extends Activity implements TextWatcher {
 	 */
 	private void updateBook() {
 		String bookName = bookView.getText().toString();
-		book = BookRepository.getBook(bookName);
+		book = bookRepository.getBook(bookName);
 		
-		if(BookRepository.isEmptyBook(book)) {
+		if(bookRepository.isEmptyBook(book)) {
 			pathAdapter = emptyAdapter;
 			pathView.setAdapter(pathAdapter);
 			return;

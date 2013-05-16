@@ -4,14 +4,16 @@ import il.org.mekorot.search.BookRepository;
 import android.test.AndroidTestCase;
 
 public class BookRepositoryTest extends AndroidTestCase {
+	private BookRepository bookRepository;
 	
 	public void setUp() {
-		BookRepository.setTestingMode(true);
+		bookRepository = BookRepository.instance(getContext());
+		bookRepository.setTestingMode(true);
 	}
 	public void tearDown() {
-		BookRepository.setTestingMode(false);
+		bookRepository.setTestingMode(false);
 	}
 	public void test() {
-		assertEquals(2, BookRepository.getNumberOfBooks());
+		assertEquals(2, bookRepository.getNumberOfBooks());
 	}
 }
