@@ -1,13 +1,17 @@
 package il.org.mekorot.search;
 
+import java.io.IOException;
+
 import android.content.Context;
+import android.content.res.AssetManager;
 
 public class BookRepository {
 	private static Book emptyBook = new Book("");
-	private static final String REPOSITORY_DEPLOYMENT_DIR = "books/";
-	private static final String REPOSITORY_TEST_DIR = "books_test/";
+	private static final String REPOSITORY_DEPLOYMENT_DIR = "bookRepository";
+	private static final String REPOSITORY_TEST_DIR = "bookRepositoryTest";
 	private static String REPOSITORY_DIR = REPOSITORY_DEPLOYMENT_DIR;
 	private static final String MAP_FILE = REPOSITORY_DIR + "books.map";
+	private static final String BOOK_SUFFIX = ".book";
 	private static BookRepository instance;
 	private Context context;
 	
@@ -55,8 +59,19 @@ public class BookRepository {
 	}
 
 	public int getNumberOfBooks() {
-		
-		return 0;
+		AssetManager assets = context.getAssets();
+		int result = 0;
+		try {
+			String[] files = assets.list(REPOSITORY_DIR);
+			for(String file : files) {
+				if(file.endsWith(BOOK_SUFFIX))
+					result++;
+			}
+			assets.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
 	}
 
 }

@@ -14,6 +14,6 @@ public class BookRepositoryTest extends AndroidTestCase {
 		bookRepository.setTestingMode(false);
 	}
 	public void test() {
-		assertEquals(2, bookRepository.getNumberOfBooks());
+		assertEquals(1, bookRepository.getNumberOfBooks());
 	}
 }
