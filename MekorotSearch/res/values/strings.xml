@@ -8,14 +8,6 @@
     <string name="path_text">נתיב:</string>
     <string name="mekorot_name">מקורות</string>
 
-    <string-array name="ALL_BOOKS_HEB">
-        <item>"תנ\"ך""</item>
-        <item>"משנה תורה""</item>
-        <item>"תלמוד בבלי""</item>
-        <item>"תלמוד ירושלמי""</item>
-        <item>"משנה""</item>
-    </string-array>
-
     <string name="title_activity_web">WebActivity</string>
     <string name="title_activity_result">ResultActivity</string>
     <string name="hello_world">Hello world!</string>

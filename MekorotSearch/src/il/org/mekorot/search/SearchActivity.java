@@ -36,9 +36,10 @@ public class SearchActivity extends Activity implements TextWatcher {
 		emptyAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, new String[]{});
 		
+		// get the book view and set adapter with all available books
 		bookView = (AutoCompleteTextView) findViewById(R.id.book);
 		ArrayAdapter<String> bookAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.ALL_BOOKS_HEB));
+                android.R.layout.simple_dropdown_item_1line, bookRepository.getAllBooks());
 		bookView.setAdapter(bookAdapter);
 		addBookViewTextChangedListener();
 		

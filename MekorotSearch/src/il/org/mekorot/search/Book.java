@@ -40,14 +40,6 @@ public class Book {
 			
 			return null;
 		}
-
-		public boolean hasChild(String value) {
-			for(String val : getChildren())
-				if(val.equals(value))
-					return true;
-			
-			return false;
-		}
 		
 	}
 	
