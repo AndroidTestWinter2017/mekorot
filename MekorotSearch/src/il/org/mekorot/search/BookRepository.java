@@ -19,7 +19,7 @@ public class BookRepository {
 	private static final String BOOK_SUFFIX = ".book";
 	private static BookRepository instance;
 	private Context context;
-	private BooksMap booksMap = new BooksMap();
+	private BooksMap booksMap;
 	
 	/**
 	 * Interface for the books.map file
@@ -28,14 +28,17 @@ public class BookRepository {
 	 */
 	private class BooksMap {
 		private Map<String, String> map;
+		private static final String SEPARATOR = "::";
 		
+		BooksMap() {
+			initMap();
+		}
 		/**
 		 * Returns the simple filename e.g. 1.book (without the containing folder).
 		 * @param bookName
 		 * @return
 		 */
 		public String getBookFileName(String bookName) {
-			if(map == null) initMap();
 			return map.get(bookName);
 		}
 		private void initMap() {
@@ -47,8 +50,8 @@ public class BookRepository {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 				while((line = reader.readLine()) != null) {
 					if(line.equals("")) continue;
-					// we assume a line is in the form BOOK_NAME FILE_NAME e.g., torah 1.book
-					String[] words = line.split(" ");
+					// we assume a line is in the form BOOK_NAME SEPARATOR FILE_NAME e.g., torah :: 1.book
+					String[] words = line.split(SEPARATOR);
 					map.put(words[0].trim(), words[1].trim());
 				}
 				is.close(); reader.close(); // do we need all closing? should not hurt...
@@ -56,10 +59,14 @@ public class BookRepository {
 				throw new RuntimeException(e);
 			}
 		}
+		public String[] getAllBooks() {
+			return map.keySet().toArray(new String[]{});
+		}
 	}
 	
 	private BookRepository(Context context) {
 		this.context = context;
+		booksMap = new BooksMap();
 	}
 	
 	public static BookRepository instance(Context context) {
@@ -68,20 +75,23 @@ public class BookRepository {
 		
 		return instance;
 	}
-	
-	public Book getEmptyBook() {
-		return emptyBook;
-	}
 	/**
 	 * In testing mode (flag=true) book files that are located in
 	 * a dedicated testing area are accessed. 
-	 * @param flag
 	 */
-	public void setTestingMode(boolean flag) {
-		if(flag)
-			REPOSITORY_DIR = REPOSITORY_TEST_DIR;
-		else
-			REPOSITORY_DIR = REPOSITORY_DEPLOYMENT_DIR;
+	public static BookRepository instance(Context context, boolean testingMode) {
+		if(instance == null) {
+			if(testingMode) {
+				REPOSITORY_DIR = REPOSITORY_TEST_DIR;
+			}	
+			instance = new BookRepository(context);
+		}
+		
+		return instance;
+	}
+	
+	public Book getEmptyBook() {
+		return emptyBook;
 	}
 	/**
 	 * If the book doesn't exist in the cache (TODO), creates it while
@@ -134,6 +144,10 @@ public class BookRepository {
 			throw new RuntimeException(e);
 		}
 		return result;
+	}
+
+	public String[] getAllBooks() {
+		return booksMap.getAllBooks();
 	}
 
 }

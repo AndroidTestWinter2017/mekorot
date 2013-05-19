@@ -11,12 +11,9 @@ public class BookRepositoryTest extends AndroidTestCase {
 	private static final String TORAH_BOOK_NAME = "תורה";
 	
 	public void setUp() {
-		bookRepository = BookRepository.instance(getContext());
-		bookRepository.setTestingMode(true);
+		bookRepository = BookRepository.instance(getContext(), true);
 	}
-	public void tearDown() {
-		bookRepository.setTestingMode(false);
-	}
+	
 	public void test_getNumberOfBooks() {
 		assertEquals(1, bookRepository.getNumberOfBooks());
 	}
@@ -36,5 +33,9 @@ public class BookRepositoryTest extends AndroidTestCase {
 		assertTrue(Arrays.equals(new String[]{}, book.getChildren(new String[]{"בלהבלה", "במדבר"})));
 		assertTrue(Arrays.equals(new String[]{}, book.getChildren(new String[]{"תורה", "כשגכשדגכ"})));
 		assertTrue(Arrays.equals(new String[]{}, book.getChildren(new String[]{"תורה", "בראשית", "פרק א"})));
+	}
+	
+	public void test_getAllBooks() {
+		assertEquals(4, bookRepository.getAllBooks().length);
 	}
 }
