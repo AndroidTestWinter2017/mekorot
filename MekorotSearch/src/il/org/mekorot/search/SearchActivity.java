@@ -46,7 +46,7 @@ public class SearchActivity extends Activity implements TextWatcher {
 		// adapter of pathView is determined dynamically based on the book chosen and the current path
 		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
         pathView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        //pathView.addTextChangedListener(this);
+        pathView.addTextChangedListener(this);
 	}
 
 	private void addBookViewTextChangedListener() {
