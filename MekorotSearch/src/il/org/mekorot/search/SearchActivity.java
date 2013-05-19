@@ -46,7 +46,7 @@ public class SearchActivity extends Activity implements TextWatcher {
 		// adapter of pathView is determined dynamically based on the book chosen and the current path
 		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
         pathView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        pathView.addTextChangedListener(this);
+        //pathView.addTextChangedListener(this);
 	}
 
 	private void addBookViewTextChangedListener() {
@@ -87,14 +87,19 @@ public class SearchActivity extends Activity implements TextWatcher {
 	 */
 	private void updateBook() {
 		String bookName = bookView.getText().toString();
-		book = bookRepository.getBook(bookName);
 		
-		if(bookRepository.isEmptyBook(book)) {
-			pathAdapter = emptyAdapter;
-			pathView.setAdapter(pathAdapter);
-			return;
+		if(bookName.equals("")) {
+			pathView.setAdapter(emptyAdapter);
+			return;			
 		}
 		
+		book = bookRepository.getBook(bookName);
+		
+		if(bookRepository.isEmptyBook(book)) { // there is no such book
+			pathView.setAdapter(emptyAdapter);
+			return;
+		}
+				
 		// update path adapter
 		pathAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, book.getChildren(new String[]{bookName}));

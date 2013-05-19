@@ -120,8 +120,7 @@ public class BookRepository {
 			return res;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		}
-		
+		}	
 	}
 
 	public boolean isEmptyBook(Book book) {
