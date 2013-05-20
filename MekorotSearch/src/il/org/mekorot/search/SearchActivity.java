@@ -1,5 +1,8 @@
 package il.org.mekorot.search;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.annotation.TargetApi;
@@ -67,11 +70,38 @@ public class SearchActivity extends Activity {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				
+				String path = pathView.getText().toString().trim();
+				if(path.endsWith(SEPARATOR)) { // should update the path adapter
+					String[] fullPath = getFullPath();
+					String[] children = book.getChildren(fullPath);
+					updatePathAdapter(children);
+				}
 			}
+
 		});
 		
+	}
+
+	/**
+	 * Returns the book name as well as the rest path components.
+	 * E.g., {"Torah", "Bereshit", "Perek A"}
+	 * @return
+	 */
+	private String[] getFullPath() {
+		List<String> result = new ArrayList<String>();
+		result.add(getBookName());
+		for(String elem : getPath()) {
+			if(elem.equals(" ")) continue; // last path element is a space which we would like to drop
+			result.add(elem.trim());
+		}
+		
+		return result.toArray(new String[]{});
+	}
+	private String[] getPath() {
+		return pathView.getText().toString().split(SEPARATOR);
+	}
+	private String getBookName() {
+		return bookView.getText().toString().trim();
 	}
 
 	private void addBookViewTextChangedListener() {
@@ -120,7 +150,7 @@ public class SearchActivity extends Activity {
 
 	private void updatePathAdapter(String[] content) {
 		pathAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, book.getChildren(content));
+                android.R.layout.simple_dropdown_item_1line, content);
 		pathView.setAdapter(pathAdapter);
 	}
 	
