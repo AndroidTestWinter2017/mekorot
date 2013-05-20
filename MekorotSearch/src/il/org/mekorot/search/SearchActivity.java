@@ -14,7 +14,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.MultiAutoCompleteTextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class SearchActivity extends Activity implements TextWatcher {
+public class SearchActivity extends Activity {
 	public static final String URL = "il.org.mekorot.URL";
 	private static final String SEPARATOR = ",";
 	private AutoCompleteTextView bookView;
@@ -46,7 +46,32 @@ public class SearchActivity extends Activity implements TextWatcher {
 		// adapter of pathView is determined dynamically based on the book chosen and the current path
 		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
         pathView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        pathView.addTextChangedListener(this);
+        addPathViewTextChangedListener();
+	}
+
+	private void addPathViewTextChangedListener() {
+		pathView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 	}
 
 	private void addBookViewTextChangedListener() {
@@ -66,7 +91,21 @@ public class SearchActivity extends Activity implements TextWatcher {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-				updateBook();
+				String bookName = bookView.getText().toString();
+				
+				if(bookName.equals("")) {
+					pathView.setAdapter(emptyAdapter);
+					return;			
+				}
+				
+				book = bookRepository.getBook(bookName);
+				
+				if(bookRepository.isEmptyBook(book)) { // there is no such book
+					pathView.setAdapter(emptyAdapter);
+					return;
+				}
+				
+				updatePathAdapter(book.getChildren(new String[]{bookName}));
 			}
 		});
 		
@@ -78,45 +117,13 @@ public class SearchActivity extends Activity implements TextWatcher {
 		getMenuInflater().inflate(R.menu.search, menu);
 		return true;
 	}
-	@Override
-	public void afterTextChanged(Editable s) {		 
-	}
-	/**
-	 * Ask the book repository for a book corresponding to the text
-	 * entered in the book view.
-	 */
-	private void updateBook() {
-		String bookName = bookView.getText().toString();
-		
-		if(bookName.equals("")) {
-			pathView.setAdapter(emptyAdapter);
-			return;			
-		}
-		
-		book = bookRepository.getBook(bookName);
-		
-		if(bookRepository.isEmptyBook(book)) { // there is no such book
-			pathView.setAdapter(emptyAdapter);
-			return;
-		}
-				
-		// update path adapter
+
+	private void updatePathAdapter(String[] content) {
 		pathAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, book.getChildren(new String[]{bookName}));
+                android.R.layout.simple_dropdown_item_1line, book.getChildren(content));
 		pathView.setAdapter(pathAdapter);
 	}
-
-	@Override
-	public void beforeTextChanged(CharSequence s, int start, int count,
-			int after) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	private void separatorAdded() {
 		
 	}
