@@ -23,7 +23,6 @@ public class SearchActivity extends Activity {
 	private AutoCompleteTextView bookView;
 	private MultiAutoCompleteTextView pathView;
 	private ArrayAdapter<String> pathAdapter;
-	private ArrayAdapter<String> emptyAdapter;
 	private BookRepository bookRepository;
 	/**
 	 * The book that was chosen by the user
@@ -36,8 +35,6 @@ public class SearchActivity extends Activity {
 		
 		bookRepository = BookRepository.instance(this);
 		book = bookRepository.getEmptyBook();
-		emptyAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, new String[]{});
 		
 		// get the book view and set adapter with all available books
 		bookView = (AutoCompleteTextView) findViewById(R.id.book);
@@ -70,38 +67,11 @@ public class SearchActivity extends Activity {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-				String path = pathView.getText().toString().trim();
-				if(path.endsWith(SEPARATOR)) { // should update the path adapter
-					String[] fullPath = getFullPath();
-					String[] children = book.getChildren(fullPath);
-					updatePathAdapter(children);
-				}
+				afterInputChanged();
 			}
 
 		});
 		
-	}
-
-	/**
-	 * Returns the book name as well as the rest path components.
-	 * E.g., {"Torah", "Bereshit", "Perek A"}
-	 * @return
-	 */
-	private String[] getFullPath() {
-		List<String> result = new ArrayList<String>();
-		result.add(getBookName());
-		for(String elem : getPath()) {
-			if(elem.equals(" ")) continue; // last path element is a space which we would like to drop
-			result.add(elem.trim());
-		}
-		
-		return result.toArray(new String[]{});
-	}
-	private String[] getPath() {
-		return pathView.getText().toString().split(SEPARATOR);
-	}
-	private String getBookName() {
-		return bookView.getText().toString().trim();
 	}
 
 	private void addBookViewTextChangedListener() {
@@ -121,24 +91,41 @@ public class SearchActivity extends Activity {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-				String bookName = bookView.getText().toString();
-				
-				if(bookName.equals("")) {
-					pathView.setAdapter(emptyAdapter);
-					return;			
-				}
-				
-				book = bookRepository.getBook(bookName);
-				
-				if(bookRepository.isEmptyBook(book)) { // there is no such book
-					pathView.setAdapter(emptyAdapter);
-					return;
-				}
-				
-				updatePathAdapter(book.getChildren(new String[]{bookName}));
+				afterInputChanged();
 			}
 		});
 		
+	}
+	/**
+	 * Returns the book name as well as the rest path components.
+	 * E.g., {"Torah", "Bereshit", "Perek A"}
+	 * @return
+	 */
+	private String[] getFullPath() {
+		List<String> result = new ArrayList<String>();
+		result.add(getBookName());
+		String[] path = getPath();
+		if(path.length == 0)
+			return result.toArray(new String[]{});
+		
+		for(String elem : path) {
+			if(elem.equals("") || elem.equals(" ")) continue; // last path element is a space which we would like to drop
+			result.add(elem.trim());
+		}
+		
+		return result.toArray(new String[]{});
+	}
+	/**
+	 * Note that for some reason, if the path is empty then an
+	 * array of length one is returned (with an empty string). Is that
+	 * the way split works?
+	 * @return
+	 */
+	private String[] getPath() {
+		return pathView.getText().toString().split(SEPARATOR);
+	}
+	private String getBookName() {
+		return bookView.getText().toString().trim();
 	}
 
 	@Override
@@ -154,12 +141,6 @@ public class SearchActivity extends Activity {
 		pathView.setAdapter(pathAdapter);
 	}
 	
-	private void separatorAdded() {
-		
-	}
-	private void separatorRemoved() {
-		
-	}
 	public void searchButtonPressed(View view) {
 		Intent intent = new Intent(this, ResultActivity.class);
 		intent.putExtra(URL, "http://www.mechon-mamre.org/i/7611n.htm");
@@ -177,6 +158,18 @@ public class SearchActivity extends Activity {
 			pathView.requestFocus();
 			break;
 		}
+	}
+
+	private void afterInputChanged() {
+		// do we need to update the book?
+		String bookName = bookView.getText().toString();
+		if(!bookName.equals(book.getName()))
+			book = bookRepository.getBook(bookName);
+		
+		String[] fullPath = getFullPath();
+		String[] children = book.getChildren(fullPath);
+		if(children.length != 0)
+			updatePathAdapter(children);
 	}
 
 }
