@@ -38,4 +38,9 @@ public class BookRepositoryTest extends AndroidTestCase {
 	public void test_getAllBooks() {
 		assertEquals(4, bookRepository.getAllBooks().length);
 	}
+	
+	public void test_getDepth() {
+		Book book = bookRepository.getBook(TORAH_BOOK_NAME);
+		assertEquals(3, book.getDepth());
+	}
 }

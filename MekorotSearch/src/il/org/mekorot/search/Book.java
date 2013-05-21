@@ -40,6 +40,26 @@ public class Book {
 			
 			return null;
 		}
+		/**
+		 * Note: the depth is calculated based on the left branch of
+		 * the tree. Since we expect all our branches to be in equal depth
+		 * this should work fine.
+		 * @param node
+		 * @return
+		 */
+		public int getDepth() {
+			if(children.size() == 0)
+				return 1;
+			else
+				return 1 + getLeftChild().getDepth();
+		}
+		public Node getLeftChild() {
+			if(children.size() == 0)
+				return null;
+			else
+				return children.get(0);
+		}
+		
 		
 	}
 	
@@ -155,6 +175,14 @@ public class Book {
 		System.arraycopy(path, 1, newpath, 0, path.length-1);
 		return getChildren(child, newpath);
 		
+	}
+
+	/**
+	 * Returns the height of the tree, how deep it is.
+	 * @return
+	 */
+	public int getDepth() {
+		return root.getDepth();
 	}
 
 }
