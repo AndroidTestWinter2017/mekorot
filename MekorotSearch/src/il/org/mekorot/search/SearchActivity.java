@@ -34,7 +34,6 @@ public class SearchActivity extends Activity {
 		setContentView(R.layout.activity_search);
 		
 		bookRepository = BookRepository.instance(this);
-		book = bookRepository.getEmptyBook();
 		
 		// get the book view and set adapter with all available books
 		bookView = (AutoCompleteTextView) findViewById(R.id.book);
@@ -163,8 +162,11 @@ public class SearchActivity extends Activity {
 	private void afterInputChanged() {
 		// do we need to update the book?
 		String bookName = bookView.getText().toString();
-		if(!bookName.equals(book.getName()))
+		if(book == null || !bookName.equals(book.getName()))
 			book = bookRepository.getBook(bookName);
+		
+		if(book == null)
+			return;
 		
 		String[] fullPath = getFullPath();
 		String[] children = book.getChildren(fullPath);

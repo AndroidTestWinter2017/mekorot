@@ -20,7 +20,7 @@ public class BookRepositoryTest extends AndroidTestCase {
 	public void test_getBook() {
 		// for a non-existing book we expect an empty book, i.e., with a name ""
 		Book book = bookRepository.getBook("bla bla");
-		assertEquals("", book.getName());
+		assertNull(book);
 		
 		// now we check our Torah book
 		book = bookRepository.getBook(TORAH_BOOK_NAME);

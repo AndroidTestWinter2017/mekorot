@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 
 public class BookRepository {
-	private static Book emptyBook = new Book(null);
 	private static final String REPOSITORY_DEPLOYMENT_DIR = "bookRepository";
 	private static final String REPOSITORY_TEST_DIR = "bookRepositoryTest";
 	private static String REPOSITORY_DIR = REPOSITORY_DEPLOYMENT_DIR;
@@ -89,21 +88,18 @@ public class BookRepository {
 		
 		return instance;
 	}
-	
-	public Book getEmptyBook() {
-		return emptyBook;
-	}
+
 	/**
 	 * If the book doesn't exist in the cache (TODO), creates it while
 	 * initializing its content from a file. If there is no such corresponding file,
-	 * an empty book is returned.
+	 * null is returned.
 	 * @param name
 	 * @return
 	 */
 	public Book getBook(String name) {
 		String fileName = booksMap.getBookFileName(name);
 		if(fileName == null)
-			return emptyBook;
+			return null;
 		
 		return new Book(getBookInputStream(fileName));
 	}
