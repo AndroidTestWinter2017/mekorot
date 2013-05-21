@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -24,6 +25,7 @@ public class SearchActivity extends Activity {
 	private MultiAutoCompleteTextView pathView;
 	private ArrayAdapter<String> pathAdapter;
 	private BookRepository bookRepository;
+	private Button searchButton;
 	/**
 	 * The book that was chosen by the user
 	 */
@@ -34,6 +36,8 @@ public class SearchActivity extends Activity {
 		setContentView(R.layout.activity_search);
 		
 		bookRepository = BookRepository.instance(this);
+		searchButton = (Button) findViewById(R.id.search_button);
+		searchButton.setEnabled(false);
 		
 		// get the book view and set adapter with all available books
 		bookView = (AutoCompleteTextView) findViewById(R.id.book);
@@ -100,7 +104,7 @@ public class SearchActivity extends Activity {
 	 * E.g., {"Torah", "Bereshit", "Perek A"}
 	 * @return
 	 */
-	private String[] getFullPath() {
+	private String[] getEntirePath() {
 		List<String> result = new ArrayList<String>();
 		result.add(getBookName());
 		String[] path = getPath();
@@ -121,7 +125,10 @@ public class SearchActivity extends Activity {
 	 * @return
 	 */
 	private String[] getPath() {
-		return pathView.getText().toString().split(SEPARATOR);
+		return getPathText().split(SEPARATOR);
+	}
+	private String getPathText() {
+		return pathView.getText().toString().trim();
 	}
 	private String getBookName() {
 		return bookView.getText().toString().trim();
@@ -160,7 +167,8 @@ public class SearchActivity extends Activity {
 	}
 
 	private void afterInputChanged() {
-		// do we need to update the book?
+		searchButton.setEnabled(false);
+		// check whether our book should be updated
 		String bookName = bookView.getText().toString();
 		if(book == null || !bookName.equals(book.getName()))
 			book = bookRepository.getBook(bookName);
@@ -168,8 +176,22 @@ public class SearchActivity extends Activity {
 		if(book == null)
 			return;
 		
-		String[] fullPath = getFullPath();
-		String[] children = book.getChildren(fullPath);
+		String[] path = getEntirePath();
+		
+		// check whether the user entered a complete
+		// path. If so, we remove the ending separator
+		// and enable the search button.
+		String pathText = getPathText();
+		if(path.length == book.getDepth() && pathText.endsWith(SEPARATOR)) {
+			pathView.setText(pathText.substring(0, pathText.length() - 1));
+			searchButton.setEnabled(true);
+			pathView.setSelection(pathText.length() -1); // set the position of the cursor at the end. Othewise it jumps to the beginning.
+			return;
+		}
+			
+		
+		String[] children = book.getChildren(path);
+		
 		if(children.length != 0)
 			updatePathAdapter(children);
 	}
