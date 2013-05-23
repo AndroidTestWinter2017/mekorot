@@ -59,6 +59,23 @@ public class Book {
 			else
 				return children.get(0);
 		}
+
+		public boolean isLegalPath(String[] path) {
+			if(path == null || path.length != getDepth() || !path[0].equals(getValue()))
+				return false;
+			
+			if(path.length == 1)
+				return true;
+			
+			Node node = getChild(path[1]);
+			if(node == null)
+				return false;
+			
+			String[] newpath = new String[path.length -1];
+			System.arraycopy(path, 1, newpath, 0, path.length-1);
+			
+			return node.isLegalPath(newpath);
+		}
 		
 		
 	}
@@ -183,6 +200,10 @@ public class Book {
 	 */
 	public int getDepth() {
 		return root.getDepth();
+	}
+
+	public boolean isLegalPath(String[] path) {
+		return root.isLegalPath(path);
 	}
 
 }

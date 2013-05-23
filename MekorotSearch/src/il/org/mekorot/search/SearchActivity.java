@@ -178,14 +178,14 @@ public class SearchActivity extends Activity {
 		
 		String[] path = getEntirePath();
 		
-		// check whether the user entered a complete
+		// check whether the user entered a complete and legal
 		// path. If so, we remove the ending separator
 		// and enable the search button.
 		String pathText = getPathText();
-		if(path.length == book.getDepth() && pathText.endsWith(SEPARATOR)) {
+		if(path.length == book.getDepth() && pathText.endsWith(SEPARATOR) && book.isLegalPath(path)) {
 			pathView.setText(pathText.substring(0, pathText.length() - 1));
 			searchButton.setEnabled(true);
-			pathView.setSelection(pathText.length() -1); // set the position of the cursor at the end. Othewise it jumps to the beginning.
+			pathView.setSelection(pathText.length() -1); // set the position of the cursor at the end. Otherwise it jumps to the beginning.
 			return;
 		}
 			

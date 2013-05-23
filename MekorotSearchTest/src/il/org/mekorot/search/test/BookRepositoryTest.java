@@ -8,10 +8,12 @@ import android.test.AndroidTestCase;
 
 public class BookRepositoryTest extends AndroidTestCase {
 	private BookRepository bookRepository;
+	private Book torahBook;
 	private static final String TORAH_BOOK_NAME = "תורה";
 	
 	public void setUp() {
 		bookRepository = BookRepository.instance(getContext(), true);
+		torahBook = bookRepository.getBook(TORAH_BOOK_NAME);
 	}
 	
 	public void test_getNumberOfBooks() {
@@ -23,16 +25,15 @@ public class BookRepositoryTest extends AndroidTestCase {
 		assertNull(book);
 		
 		// now we check our Torah book
-		book = bookRepository.getBook(TORAH_BOOK_NAME);
-		assertEquals("תורה", book.getName());
-		String[] res = book.getChildren(new String[]{"תורה"});
+		assertEquals("תורה", torahBook.getName());
+		String[] res = torahBook.getChildren(new String[]{"תורה"});
 		System.out.println(res);
 		assertTrue(Arrays.equals(new String[]{"בראשית", "שמות", "ויקרא", "במדבר", "דברים"}, res));
-		assertTrue(Arrays.equals(new String[]{"פרק א", "פרק ב", "פרק ג", "פרק ד"}, book.getChildren(new String[]{"תורה", "ויקרא"})));
-		assertTrue(Arrays.equals(new String[]{"פרק א", "פרק ב"}, book.getChildren(new String[]{"תורה", "במדבר"})));
-		assertTrue(Arrays.equals(new String[]{}, book.getChildren(new String[]{"בלהבלה", "במדבר"})));
-		assertTrue(Arrays.equals(new String[]{}, book.getChildren(new String[]{"תורה", "כשגכשדגכ"})));
-		assertTrue(Arrays.equals(new String[]{}, book.getChildren(new String[]{"תורה", "בראשית", "פרק א"})));
+		assertTrue(Arrays.equals(new String[]{"פרק א", "פרק ב", "פרק ג", "פרק ד"}, torahBook.getChildren(new String[]{"תורה", "ויקרא"})));
+		assertTrue(Arrays.equals(new String[]{"פרק א", "פרק ב"}, torahBook.getChildren(new String[]{"תורה", "במדבר"})));
+		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"בלהבלה", "במדבר"})));
+		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"תורה", "כשגכשדגכ"})));
+		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"תורה", "בראשית", "פרק א"})));
 	}
 	
 	public void test_getAllBooks() {
@@ -40,7 +41,11 @@ public class BookRepositoryTest extends AndroidTestCase {
 	}
 	
 	public void test_getDepth() {
-		Book book = bookRepository.getBook(TORAH_BOOK_NAME);
-		assertEquals(3, book.getDepth());
+		assertEquals(3, torahBook.getDepth());
+	}
+	public void test_isLegalPath() {
+		assertFalse(torahBook.isLegalPath(new String[]{}));
+		assertFalse(torahBook.isLegalPath(new String[]{"תורה", "בראשית"}));
+		assertTrue(torahBook.isLegalPath(new String[]{"תורה", "בראשית", "פרק א"}));
 	}
 }
