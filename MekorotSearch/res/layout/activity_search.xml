@@ -62,6 +62,7 @@
         android:layout_weight="1"
         android:gravity="right"
         android:singleLine="true"
+        android:completionThreshold="1"
         android:imeOptions="actionSearch"/>
         <TextView
         android:layout_width="wrap_content"
