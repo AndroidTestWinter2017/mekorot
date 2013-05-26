@@ -121,7 +121,7 @@ public class Book {
 				if(lastWordHasRangeCharacter(lastWord)) { // e.g. "*** Torah Perek A..B"
 					String begin = lastWord.split(RANGE_CHARACTER)[0];
 					String end = lastWord.split(RANGE_CHARACTER)[1];
-					String[] range = new HebrewRange(begin, end, HebrewRange.ALEPH_BET_NUMBERING).getRange();
+					String[] range = new HebrewRange(begin, end).getRange();
 					String prefix = removeLastWord(line);
 					for(String elem : range) {
 						buffer.append(prefix + " " + elem);

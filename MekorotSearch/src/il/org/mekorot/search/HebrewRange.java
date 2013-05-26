@@ -24,10 +24,10 @@ public class HebrewRange {
 	private String end;
 	private int mode;
 
-	public HebrewRange(String begin, String end, int mode) {
+	public HebrewRange(String begin, String end) {
 		this.begin = begin;
 		this.end = end;
-		this.mode = mode;
+		this.mode = ALEPH_BET_NUMBERING;
 	}
 
 	public String[] getRange() {
