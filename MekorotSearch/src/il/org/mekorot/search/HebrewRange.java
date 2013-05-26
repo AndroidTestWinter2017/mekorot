@@ -7,8 +7,13 @@ public class HebrewRange {
 	 * א ב ג ד ה... קיט
 	 */
 	public static final int ALEPH_BET_NUMBERING = 0;
+	/**
+	 * Describes a range of Talmud Bavli pages, e.g.,
+	 * ב. ב: ג. ג:
+	 */
+	public static final int TALMUD_BAVLI_NUMBERING = 1;
 	
-	private static String[] ALEPH_BET_NUMBERING_ARRAY = new String[]{
+	private static final String[] ALEPH_BET_NUMBERING_ARRAY = new String[]{
 		"א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ",
 		"כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל", "לא", "לב", "לג", "לד", "לה", "לו", "לז", "לח", "לט", "מ",
 		"מא", "מב", "מג", "מד", "מה", "מו", "מז", "מח", "מט", "נ", "נא", "נב", "נג", "נד", "נה", "נו", "נז", "נח", "נט", "ס",
@@ -20,6 +25,19 @@ public class HebrewRange {
 		"קסא", "קסב", "קסג", "קסד", "קסה", "קסו", "קסז", "קסח", "קסט", "קע", "קעא", "קעב", "קעג", "קעד", "קעה", "קעו", "קעז", "קעח", "קעט", "קפ",
 		"קפא", "קפב", "קפג", "קפד", "קפה", "קפו", "קפז", "קפח", "קפט", "קצ", "קצא", "קצד", "קצג", "קצד", "קצה", "קצו", "קצז", "קצח", "קצט"}; 
 	
+	/**
+	 * Duplicate of ALEPH_BET_NUMBERING_ARRAY with page indicators. E.g., for "א" we have
+	 * here "א." and "א:".
+	 */
+	private static final String[] TALMUD_BAVLI_NUMBERING_ARRAY = new String[ALEPH_BET_NUMBERING_ARRAY.length * 2];
+	
+	static {
+		for(int i=0; i<ALEPH_BET_NUMBERING_ARRAY.length; i++) {
+			TALMUD_BAVLI_NUMBERING_ARRAY[i*2] = ALEPH_BET_NUMBERING_ARRAY[i] + ".";
+			TALMUD_BAVLI_NUMBERING_ARRAY[i*2 + 1] = ALEPH_BET_NUMBERING_ARRAY[i] + ":";
+		}
+	}
+	
 	private String begin;
 	private String end;
 	private int mode;
@@ -27,7 +45,11 @@ public class HebrewRange {
 	public HebrewRange(String begin, String end) {
 		this.begin = begin;
 		this.end = end;
-		this.mode = ALEPH_BET_NUMBERING;
+		
+		if(begin.endsWith(".") || begin.endsWith(":"))
+			this.mode = TALMUD_BAVLI_NUMBERING;
+		else
+			this.mode = ALEPH_BET_NUMBERING;
 	}
 
 	public String[] getRange() {
@@ -54,6 +76,10 @@ public class HebrewRange {
 		switch (mode) {
 		case ALEPH_BET_NUMBERING:
 			fill(ALEPH_BET_NUMBERING_ARRAY, array, beginIndex, endIndex);
+			break;
+		case TALMUD_BAVLI_NUMBERING:
+			fill(TALMUD_BAVLI_NUMBERING_ARRAY, array, beginIndex, endIndex);
+			break;
 		}
 	}
 
@@ -72,6 +98,8 @@ public class HebrewRange {
 		switch (mode) {
 		case ALEPH_BET_NUMBERING:
 			return getIndex(ALEPH_BET_NUMBERING_ARRAY, elem);
+		case TALMUD_BAVLI_NUMBERING:
+			return getIndex(TALMUD_BAVLI_NUMBERING_ARRAY, elem);
 
 		default:
 			return -1;

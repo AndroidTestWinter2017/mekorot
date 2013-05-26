@@ -117,6 +117,7 @@ public class Book {
 		String line;
 		try {
 			while((line = reader.readLine()) != null) {
+				if(line.equals("")) continue;
 				String lastWord = getLastWord(line);
 				if(lastWordHasRangeCharacter(lastWord)) { // e.g. "*** Torah Perek A..B"
 					String begin = lastWord.split(RANGE_CHARACTER)[0];

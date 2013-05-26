@@ -15,5 +15,10 @@ public class HebrewRangeTest extends AndroidTestCase {
 		range = new HebrewRange("ק", "קז");
 		assertTrue(Arrays.equals(range.getRange(), new String[]{"ק", "קא", "קב", "קג", "קד", "קה", "קו", "קז"}));
 	}
+	public void test_talmud_babvli_numbering() {
+		HebrewRange range = new HebrewRange("ב.", "ד:");
+		String[] result = range.getRange();
+		assertTrue(Arrays.equals(result, new String[]{"ב.", "ב:", "ג.", "ג:", "ד.", "ד:"}));
+	}
 
 }
