@@ -1,14 +1,15 @@
 package il.org.mekorot.search;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Book {
+	private static final String RANGE_CHARACTER = ">>";
 	private Node root = new Node();
 
 	private class Node {
@@ -93,8 +94,67 @@ public class Book {
 			root.setValue("");
 			return;
 		}
+		
+		is = preprocesssBookFile(is);
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 		buildTree(root, reader);
+	}
+
+	/**
+	 * Returning an input stream where the special UNTIL markers are
+	 * flattened. E.g., if a line "*** Perek A..D" exists in the given
+	 * input stream then in the returned input stream will be 4 corresponding
+	 * lines, one for each perek.
+	 * @param is
+	 * @return
+	 */
+	private InputStream preprocesssBookFile(InputStream is) {
+		// TODO: currently we simply copy the lines. should flatten them.
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		StringBuffer buffer = new StringBuffer();
+		
+		String line;
+		try {
+			while((line = reader.readLine()) != null) {
+				String lastWord = getLastWord(line);
+				if(lastWordHasRangeCharacter(lastWord)) { // e.g. "*** Torah Perek A..B"
+					String begin = lastWord.split(RANGE_CHARACTER)[0];
+					String end = lastWord.split(RANGE_CHARACTER)[1];
+					String[] range = new HebrewRange(begin, end, HebrewRange.ALEPH_BET_NUMBERING).getRange();
+					String prefix = removeLastWord(line);
+					for(String elem : range) {
+						buffer.append(prefix + " " + elem);
+						buffer.append("\n");
+					}
+						
+				} else {
+					buffer.append(line);
+					buffer.append("\n");					
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return stringBufferToInputStream(buffer);
+	}
+
+	private String removeLastWord(String line) {
+		int index = line.trim().lastIndexOf(" ");
+		return line.trim().substring(0, index);
+	}
+
+	private boolean lastWordHasRangeCharacter(String word) {
+		return word.contains(RANGE_CHARACTER);
+	}
+
+	private String getLastWord(String line) {
+		String[] words = line.split(" ");
+		return words[words.length -1];
+	}
+
+	private InputStream stringBufferToInputStream(StringBuffer buffer) {
+		return new ByteArrayInputStream(buffer.toString().getBytes());
 	}
 
 	/**

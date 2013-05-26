@@ -27,10 +27,14 @@ public class BookRepositoryTest extends AndroidTestCase {
 		// now we check our Torah book
 		assertEquals("תורה", torahBook.getName());
 		String[] res = torahBook.getChildren(new String[]{"תורה"});
-		System.out.println(res);
+		
 		assertTrue(Arrays.equals(new String[]{"בראשית", "שמות", "ויקרא", "במדבר", "דברים"}, res));
-		assertTrue(Arrays.equals(new String[]{"פרק א", "פרק ב", "פרק ג", "פרק ד"}, torahBook.getChildren(new String[]{"תורה", "ויקרא"})));
-		assertTrue(Arrays.equals(new String[]{"פרק א", "פרק ב"}, torahBook.getChildren(new String[]{"תורה", "במדבר"})));
+		
+		assertEquals(50, torahBook.getChildren(new String[]{"תורה", "בראשית"}).length);
+		assertEquals(40, torahBook.getChildren(new String[]{"תורה", "שמות"}).length);
+		assertEquals(27, torahBook.getChildren(new String[]{"תורה", "ויקרא"}).length);
+		assertEquals(36, torahBook.getChildren(new String[]{"תורה", "במדבר"}).length);
+		assertEquals(34, torahBook.getChildren(new String[]{"תורה", "דברים"}).length);
 		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"בלהבלה", "במדבר"})));
 		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"תורה", "כשגכשדגכ"})));
 		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"תורה", "בראשית", "פרק א"})));
