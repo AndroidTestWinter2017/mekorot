@@ -19,7 +19,7 @@ import android.widget.MultiAutoCompleteTextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SearchActivity extends Activity {
-	public static final String URL = "il.org.mekorot.URL";
+	public static String URL;
 	private static final String SEPARATOR = ",";
 	private AutoCompleteTextView bookView;
 	private MultiAutoCompleteTextView pathView;
@@ -149,7 +149,7 @@ public class SearchActivity extends Activity {
 	
 	public void searchButtonPressed(View view) {
 		Intent intent = new Intent(this, ResultActivity.class);
-		intent.putExtra(URL, "http://www.mechon-mamre.org/i/7611n.htm");
+		intent.putExtra(URL, book.getUrl(getEntirePath()));
 		startActivity(intent);
 	}
 	public void deleteButtonPressed(View view) {

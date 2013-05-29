@@ -1,5 +1,7 @@
 package il.org.mekorot.search;
 
+import il.org.mekorot.search.bookurls.TanachUrlProvider;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -11,10 +13,12 @@ import java.util.List;
 public class Book {
 	private static final String RANGE_CHARACTER = ">>";
 	private Node root = new Node();
+	private UrlProvider bookUrl;
 
 	private class Node {
 		private String value;
 		private List<Node> children = new ArrayList<Book.Node>();
+		private String url;
 
 		String getValue() {
 			return value;
@@ -77,6 +81,32 @@ public class Book {
 			
 			return node.isLegalPath(newpath);
 		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+		public String getUrl() {
+			return url;
+		}
+
+		public boolean isLeaf() {
+			return children.size() == 0;
+		}
+
+		/**
+		 * Path is a legal path from root to leaf. The method returns
+		 * the last node in the path.
+		 * @param path
+		 * @return
+		 */
+		public Node getLeaf(String[] path) {
+			if(path.length == 1)
+				return this;
+			
+			String[] newpath = new String[path.length -1];
+			System.arraycopy(path, 1, newpath, 0, path.length-1);
+			return this.getChild(path[1]).getLeaf(newpath);
+		}
 		
 		
 	}
@@ -94,7 +124,7 @@ public class Book {
 			root.setValue("");
 			return;
 		}
-		
+		bookUrl = new TanachUrlProvider();
 		is = preprocesssBookFile(is);
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -178,6 +208,10 @@ public class Book {
 				if(mylevel == -1) { // this is the first line where we set the value of the node
 					mylevel = getTreeLevel(line);
 					node.setValue(getContent(line));
+					bookUrl.reachedLevel(mylevel, getContent(line));
+					if(node.isLeaf())
+						node.setUrl(bookUrl.getUrl());
+					
 					continue;
 				}
 				int currlevel = getTreeLevel(line);
@@ -263,8 +297,21 @@ public class Book {
 		return root.getDepth();
 	}
 
+	/**
+	 * A legal path starts from root to a leaf.
+	 * @param path
+	 * @return
+	 */
 	public boolean isLegalPath(String[] path) {
 		return root.isLegalPath(path);
+	}
+
+	public String getUrl(String[] path) {
+		if(!isLegalPath(path))
+			return null;
+		
+		Node leaf = root.getLeaf(path);
+		return leaf.getUrl();
 	}
 
 }

@@ -52,4 +52,8 @@ public class BookRepositoryTest extends AndroidTestCase {
 		assertFalse(torahBook.isLegalPath(new String[]{"תורה", "בראשית"}));
 		assertTrue(torahBook.isLegalPath(new String[]{"תורה", "בראשית", "פרק א"}));
 	}
+	public void test_getUrl() {
+		assertEquals("http://www.mechon-mamre.org/i/t/t0101.htm", torahBook.getUrl(new String[]{"תורה", "בראשית", "פרק א"}));
+		//add more tests and improve design.
+	}
 }
