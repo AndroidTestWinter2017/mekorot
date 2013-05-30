@@ -9,15 +9,18 @@ import android.test.AndroidTestCase;
 public class BookRepositoryTest extends AndroidTestCase {
 	private BookRepository bookRepository;
 	private Book torahBook;
+	private Book bavliBook;
 	private static final String TORAH_BOOK_NAME = "תורה";
+	private static final String BAVLI_BOOK_NAME = "תלמוד בבלי";
 	
 	public void setUp() {
 		bookRepository = BookRepository.instance(getContext(), true);
 		torahBook = bookRepository.getBook(TORAH_BOOK_NAME);
+		bavliBook = bookRepository.getBook(BAVLI_BOOK_NAME);
 	}
 	
 	public void test_getNumberOfBooks() {
-		assertEquals(1, bookRepository.getNumberOfBooks());
+		assertEquals(2, bookRepository.getNumberOfBooks());
 	}
 	public void test_getBook() {
 		// for a non-existing book we expect an empty book, i.e., with a name ""
@@ -41,7 +44,7 @@ public class BookRepositoryTest extends AndroidTestCase {
 	}
 	
 	public void test_getAllBooks() {
-		assertEquals(4, bookRepository.getAllBooks().length);
+		assertEquals(2, bookRepository.getAllBooks().length);
 	}
 	
 	public void test_getDepth() {
@@ -55,5 +58,9 @@ public class BookRepositoryTest extends AndroidTestCase {
 	public void test_getUrl() {
 		assertEquals("http://www.mechon-mamre.org/i/t/t0101.htm", torahBook.getUrl(new String[]{"תורה", "בראשית", "פרק א"}));
 		//add more tests and improve design.
+		assertEquals("http://www.hebrewbooks.org/shas.aspx?mesechta=1&daf=2b&format=text", 
+				bavliBook.getUrl(new String[]{"תלמוד בבלי", "ברכות", "דף ב:"}));
+		assertEquals("http://www.hebrewbooks.org/shas.aspx?mesechta=12&daf=29&format=text", 
+				bavliBook.getUrl(new String[]{"תלמוד בבלי", "מועד קטן", "דף כט."}));
 	}
 }
