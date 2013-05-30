@@ -1,5 +1,6 @@
 package il.org.mekorot.search;
 
+import il.org.mekorot.search.bookurls.BavliUrlProvider;
 import il.org.mekorot.search.bookurls.TanachUrlProvider;
 
 import java.io.BufferedReader;
@@ -14,6 +15,7 @@ public class Book {
 	private static final String RANGE_CHARACTER = ">>";
 	private Node root = new Node();
 	private UrlProvider bookUrl;
+	private String name;
 
 	private class Node {
 		private String value;
@@ -119,12 +121,17 @@ public class Book {
 	 * Initialize from a book file
 	 * @param bookInputStream
 	 */
-	public Book(InputStream is) {
+	public Book(InputStream is, String name) {
 		if(is == null) { // return "empty book"
-			root.setValue("");
+			root.setValue(name);
 			return;
 		}
-		bookUrl = new TanachUrlProvider();
+		this.name = name;
+		if(name.equals("תנ\"ך") || name.equals("תורה"))
+			bookUrl = new TanachUrlProvider();
+		else if(name.equals("תלמוד בבלי"))
+			bookUrl = new BavliUrlProvider();
+			
 		is = preprocesssBookFile(is);
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));

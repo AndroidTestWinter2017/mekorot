@@ -101,7 +101,7 @@ public class BookRepository {
 		if(fileName == null)
 			return null;
 		
-		return new Book(getBookInputStream(fileName));
+		return new Book(getBookInputStream(fileName), name);
 	}
 
 	/**

@@ -7,7 +7,7 @@ public class BookTest extends AndroidTestCase {
 	Book book;
 	
 	public void setUp() {
-		book = new Book(null);
+		book = new Book(null, "");
 	}
 	
 	public void test_getTreeLevel() {

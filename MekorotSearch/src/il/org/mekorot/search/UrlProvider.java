@@ -32,5 +32,11 @@ public abstract class UrlProvider {
 	protected Integer toInt(String value) {
 		return Integer.parseInt(value);
 	}
+	protected String removeLastChar(String str) {
+		if(str == null)
+			return null;
+		else
+			return str.substring(0, str.length() - 1);
+	}
 	
 }
