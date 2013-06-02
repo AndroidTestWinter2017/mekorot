@@ -1,6 +1,7 @@
 package il.org.mekorot.search;
 
 import il.org.mekorot.search.bookurls.BavliUrlProvider;
+import il.org.mekorot.search.bookurls.RambamUrlProvider;
 import il.org.mekorot.search.bookurls.TanachUrlProvider;
 
 import java.io.BufferedReader;
@@ -131,6 +132,8 @@ public class Book {
 			bookUrl = new TanachUrlProvider();
 		else if(name.equals("תלמוד בבלי"))
 			bookUrl = new BavliUrlProvider();
+		else if(name.equals("משנה תורה להרמב\"ם"))
+			bookUrl = new RambamUrlProvider();
 			
 		is = preprocesssBookFile(is);
 		

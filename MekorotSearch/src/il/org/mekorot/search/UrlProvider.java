@@ -38,5 +38,18 @@ public abstract class UrlProvider {
 		else
 			return str.substring(0, str.length() - 1);
 	}
+	protected String removeFirstChar(String str) {
+		if(str == null)
+			return null;
+		else
+			return str.substring(1, str.length());
+	}
+	protected Boolean isInArray(Object[] array, Object value) {
+		for(Object elem : array) {
+			if(elem.equals(value))
+				return true;
+		}
+		return false;
+	}
 	
 }

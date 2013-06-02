@@ -10,17 +10,20 @@ public class BookRepositoryTest extends AndroidTestCase {
 	private BookRepository bookRepository;
 	private Book torahBook;
 	private Book bavliBook;
+	private Book rambamBook;
 	private static final String TORAH_BOOK_NAME = "תורה";
 	private static final String BAVLI_BOOK_NAME = "תלמוד בבלי";
+	private static final String RAMBAM_BOOK_NAME = "משנה תורה להרמב\"ם";
 	
 	public void setUp() {
 		bookRepository = BookRepository.instance(getContext(), true);
 		torahBook = bookRepository.getBook(TORAH_BOOK_NAME);
 		bavliBook = bookRepository.getBook(BAVLI_BOOK_NAME);
+		rambamBook = bookRepository.getBook(RAMBAM_BOOK_NAME);
 	}
 	
 	public void test_getNumberOfBooks() {
-		assertEquals(2, bookRepository.getNumberOfBooks());
+		assertEquals(3, bookRepository.getNumberOfBooks());
 	}
 	public void test_getBook() {
 		// for a non-existing book we expect an empty book, i.e., with a name ""
@@ -44,7 +47,7 @@ public class BookRepositoryTest extends AndroidTestCase {
 	}
 	
 	public void test_getAllBooks() {
-		assertEquals(2, bookRepository.getAllBooks().length);
+		assertEquals(3, bookRepository.getAllBooks().length);
 	}
 	
 	public void test_getDepth() {
@@ -62,5 +65,13 @@ public class BookRepositoryTest extends AndroidTestCase {
 				bavliBook.getUrl(new String[]{"תלמוד בבלי", "ברכות", "דף ב:"}));
 		assertEquals("http://www.hebrewbooks.org/shas.aspx?mesechta=12&daf=29&format=text", 
 				bavliBook.getUrl(new String[]{"תלמוד בבלי", "מועד קטן", "דף כט."}));
+		assertEquals("http://www.mechon-mamre.org/i/1104.htm",
+				rambamBook.getUrl(new String[]{"משנה תורה להרמב\"ם", "יסודי התורה", "פרק ד"}));
+		assertEquals("http://www.mechon-mamre.org/i/9410.htm",
+				rambamBook.getUrl(new String[]{"משנה תורה להרמב\"ם", "שגגות", "פרק י"}));
+		assertEquals("http://www.mechon-mamre.org/i/e512.htm",
+				rambamBook.getUrl(new String[]{"משנה תורה להרמב\"ם", "מלכים ומלחמות", "פרק יב"}));
+		assertEquals("http://www.mechon-mamre.org/i/3a04.htm",
+				rambamBook.getUrl(new String[]{"משנה תורה להרמב\"ם", "מגלה וחנוכה", "פרק ד"}));
 	}
 }
