@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:singleLine="true"
+        android:completionThreshold="1"
         android:imeOptions="actionNext"/>
 	    <TextView 
         android:text="@string/book_text"
