@@ -3,6 +3,7 @@ package il.org.mekorot.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.annotation.TargetApi;
@@ -19,7 +20,6 @@ import android.widget.MultiAutoCompleteTextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SearchActivity extends Activity {
-	public static String URL;
 	private static final String SEPARATOR = ",";
 	private AutoCompleteTextView bookView;
 	private MultiAutoCompleteTextView pathView;
@@ -148,9 +148,9 @@ public class SearchActivity extends Activity {
 	}
 	
 	public void searchButtonPressed(View view) {
-		Intent intent = new Intent(this, ResultActivity.class);
-		intent.putExtra(URL, book.getUrl(getEntirePath()));
-		startActivity(intent);
+		// open a browser for the desired url
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(book.getUrl(getEntirePath())));
+		startActivity(browserIntent);
 	}
 	public void deleteButtonPressed(View view) {
 		switch(view.getId()) {
