@@ -11,12 +11,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SearchActivity extends Activity {
@@ -49,10 +53,11 @@ public class SearchActivity extends Activity {
 		// adapter of pathView is determined dynamically based on the book chosen and the current path
 		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
         pathView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        addPathViewTextChangedListener();
+        addPathViewListeners();
 	}
 
-	private void addPathViewTextChangedListener() {
+	private void addPathViewListeners() {
+		// dynamically configuring the auto-complete adapter when test changes
 		pathView.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -73,6 +78,20 @@ public class SearchActivity extends Activity {
 				afterInputChanged();
 			}
 
+		});
+		
+		// open the browser when keyboard search button is pressed
+		pathView.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				boolean handled = false;
+		        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+		            openBrowser();
+		            handled = true;
+		        }
+		        return handled;
+			}
 		});
 		
 	}
@@ -148,10 +167,19 @@ public class SearchActivity extends Activity {
 	}
 	
 	public void searchButtonPressed(View view) {
-		// open a browser for the desired url
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(book.getUrl(getEntirePath())));
-		startActivity(browserIntent);
+		openBrowser();
 	}
+	/**
+	 * Open the browser if the path entered is legal
+	 */
+	private void openBrowser() {
+		String[] path = getEntirePath();
+		if(book.isLegalPath(path)) {
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(book.getUrl(getEntirePath())));
+			startActivity(browserIntent);
+		}
+	}
+
 	public void deleteButtonPressed(View view) {
 		switch(view.getId()) {
 		case R.id.book_delete_button:
