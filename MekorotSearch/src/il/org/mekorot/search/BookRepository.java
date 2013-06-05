@@ -11,9 +11,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 
 public class BookRepository {
-	private static final String REPOSITORY_DEPLOYMENT_DIR = "bookRepository";
-	private static final String REPOSITORY_TEST_DIR = "bookRepositoryTest";
-	private static String REPOSITORY_DIR = REPOSITORY_DEPLOYMENT_DIR;
+	private static String REPOSITORY_DIR = "bookRepository";
 	private static String MAP_FILE = "books.map";
 	private static final String BOOK_SUFFIX = ".book";
 	private static BookRepository instance;
@@ -71,20 +69,6 @@ public class BookRepository {
 	public static BookRepository instance(Context context) {
 		if(instance == null)
 			instance = new BookRepository(context);
-		
-		return instance;
-	}
-	/**
-	 * In testing mode (flag=true) book files that are located in
-	 * a dedicated testing area are accessed. 
-	 */
-	public static BookRepository instance(Context context, boolean testingMode) {
-		if(instance == null) {
-			if(testingMode) {
-				REPOSITORY_DIR = REPOSITORY_TEST_DIR;
-			}	
-			instance = new BookRepository(context);
-		}
 		
 		return instance;
 	}
