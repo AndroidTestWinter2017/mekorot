@@ -8,63 +8,61 @@ import android.test.AndroidTestCase;
 
 public class BookRepositoryTest extends AndroidTestCase {
 	private BookRepository bookRepository;
-	private Book torahBook;
+	private Book tanachBook;
 	private Book bavliBook;
 	private Book rambamBook;
-	private static final String TORAH_BOOK_NAME = "תורה";
+	private Book nevochimBook;
+	private static final String TORAH_BOOK_NAME = "תנ\"ך";
 	private static final String BAVLI_BOOK_NAME = "תלמוד בבלי";
 	private static final String RAMBAM_BOOK_NAME = "משנה תורה להרמב\"ם";
+	private static final String NEVOCHIM_BOOK_NAME = "מורה הנבוכים להרמב\"ם";
 	
 	public void setUp() {
-		bookRepository = BookRepository.instance(getContext(), true);
-		torahBook = bookRepository.getBook(TORAH_BOOK_NAME);
+		bookRepository = BookRepository.instance(getContext());
+		tanachBook = bookRepository.getBook(TORAH_BOOK_NAME);
 		bavliBook = bookRepository.getBook(BAVLI_BOOK_NAME);
 		rambamBook = bookRepository.getBook(RAMBAM_BOOK_NAME);
+		nevochimBook = bookRepository.getBook(NEVOCHIM_BOOK_NAME);
 	}
 	
 	public void test_getNumberOfBooks() {
-		assertEquals(3, bookRepository.getNumberOfBooks());
+		assertEquals(4, bookRepository.getNumberOfBooks());
 	}
 	public void test_getBook() {
 		// for a non-existing book we expect an empty book, i.e., with a name ""
 		Book book = bookRepository.getBook("bla bla");
 		assertNull(book);
 		
-		// now we check our Torah book
-		assertEquals("תורה", torahBook.getName());
-		String[] res = torahBook.getChildren(new String[]{"תורה"});
+		// now we check our Tanach book
+		assertEquals("תנ\"ך", tanachBook.getName());		
+		assertEquals(39, tanachBook.getChildren(new String[]{"תנ\"ך"}).length);
 		
-		assertTrue(Arrays.equals(new String[]{"בראשית", "שמות", "ויקרא", "במדבר", "דברים"}, res));
-		
-		assertEquals(50, torahBook.getChildren(new String[]{"תורה", "בראשית"}).length);
-		assertEquals(40, torahBook.getChildren(new String[]{"תורה", "שמות"}).length);
-		assertEquals(27, torahBook.getChildren(new String[]{"תורה", "ויקרא"}).length);
-		assertEquals(36, torahBook.getChildren(new String[]{"תורה", "במדבר"}).length);
-		assertEquals(34, torahBook.getChildren(new String[]{"תורה", "דברים"}).length);
-		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"בלהבלה", "במדבר"})));
-		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"תורה", "כשגכשדגכ"})));
-		assertTrue(Arrays.equals(new String[]{}, torahBook.getChildren(new String[]{"תורה", "בראשית", "פרק א"})));
-	}
-	
-	public void test_getAllBooks() {
-		assertEquals(3, bookRepository.getAllBooks().length);
+		assertEquals(50, tanachBook.getChildren(new String[]{"תנ\"ך", "בראשית"}).length);
+		assertEquals(40, tanachBook.getChildren(new String[]{"תנ\"ך", "שמות"}).length);
+		assertEquals(27, tanachBook.getChildren(new String[]{"תנ\"ך", "ויקרא"}).length);
+		assertEquals(36, tanachBook.getChildren(new String[]{"תנ\"ך", "במדבר"}).length);
+		assertEquals(34, tanachBook.getChildren(new String[]{"תנ\"ך", "דברים"}).length);
+		assertTrue(Arrays.equals(new String[]{}, tanachBook.getChildren(new String[]{"בלהבלה", "במדבר"})));
+		assertTrue(Arrays.equals(new String[]{}, tanachBook.getChildren(new String[]{"תורה", "כשגכשדגכ"})));
+		assertTrue(Arrays.equals(new String[]{}, tanachBook.getChildren(new String[]{"תורה", "בראשית", "פרק א"})));
 	}
 	
 	public void test_getDepth() {
-		assertEquals(3, torahBook.getDepth());
+		assertEquals(3, tanachBook.getDepth());
 	}
 	public void test_isLegalPath() {
-		assertFalse(torahBook.isLegalPath(new String[]{}));
-		assertFalse(torahBook.isLegalPath(new String[]{"תורה", "בראשית"}));
-		assertTrue(torahBook.isLegalPath(new String[]{"תורה", "בראשית", "פרק א"}));
+		assertFalse(tanachBook.isLegalPath(new String[]{}));
+		assertFalse(tanachBook.isLegalPath(new String[]{"תנ\"ך", "בראשית"}));
+		assertTrue(tanachBook.isLegalPath(new String[]{"תנ\"ך", "בראשית", "פרק א"}));
 	}
 	public void test_getUrl() {
-		assertEquals("http://www.mechon-mamre.org/i/t/t0101.htm", torahBook.getUrl(new String[]{"תורה", "בראשית", "פרק א"}));
-		//add more tests and improve design.
+		assertEquals("http://www.mechon-mamre.org/i/t/t0101.htm", tanachBook.getUrl(new String[]{"תנ\"ך", "בראשית", "פרק א"}));
+
 		assertEquals("http://www.hebrewbooks.org/shas.aspx?mesechta=1&daf=2b&format=text", 
 				bavliBook.getUrl(new String[]{"תלמוד בבלי", "ברכות", "דף ב:"}));
 		assertEquals("http://www.hebrewbooks.org/shas.aspx?mesechta=12&daf=29&format=text", 
 				bavliBook.getUrl(new String[]{"תלמוד בבלי", "מועד קטן", "דף כט."}));
+		
 		assertEquals("http://www.mechon-mamre.org/i/1104.htm",
 				rambamBook.getUrl(new String[]{"משנה תורה להרמב\"ם", "יסודי התורה", "פרק ד"}));
 		assertEquals("http://www.mechon-mamre.org/i/9410.htm",
@@ -73,5 +71,10 @@ public class BookRepositoryTest extends AndroidTestCase {
 				rambamBook.getUrl(new String[]{"משנה תורה להרמב\"ם", "מלכים ומלחמות", "פרק יב"}));
 		assertEquals("http://www.mechon-mamre.org/i/3a04.htm",
 				rambamBook.getUrl(new String[]{"משנה תורה להרמב\"ם", "מגלה וחנוכה", "פרק ד"}));
+		
+		assertEquals("http://press.tau.ac.il/perplexed/chapters/chap_2_08.htm",
+				nevochimBook.getUrl(new String[]{"מורה הנבוכים להרמב\"ם", "חלק שני", "פרק ח"}));
+		assertEquals("http://press.tau.ac.il/perplexed/chapters/chap_3_00L.htm",
+				nevochimBook.getUrl(new String[]{"מורה הנבוכים להרמב\"ם", "חלק שלישי", "פרק הקדמה"}));
 	}
 }

@@ -57,15 +57,7 @@ public class RambamUrlProvider extends UrlProvider {
 			CHAPTER = "00";
 			break;
 		case 3:
-			if(CHAPTER.startsWith("0")) {
-				String newChapter = increment(removeFirstChar(CHAPTER));
-				if(toInt(newChapter) == 10)
-					CHAPTER = "10";
-				else // < 10
-					CHAPTER =  "0" + newChapter;
-			} else {
-				CHAPTER = increment(CHAPTER);
-			}
+			CHAPTER = increment(CHAPTER);
 			break;
 		}
 

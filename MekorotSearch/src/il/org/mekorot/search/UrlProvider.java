@@ -21,13 +21,26 @@ public abstract class UrlProvider {
 	
 	/**
 	 * Gets a number in a string representation and increment it
-	 * in one.
+	 * in one. If value starts with 0 e.g. "04" then "05" is
+	 * returned, unless value is "09" and then "10" is returned. 
 	 * @param value
 	 * @return
 	 */
 	protected String increment(String value) {
-		Integer result = toInt(value) + 1;
-		return result.toString();
+		String result;
+		
+		if(value.length() == 2 && value.startsWith("0")) { // we assume value has two chars...
+			result = increment(removeFirstChar(value));
+			if(toInt(result) == 10)
+				result = "10";
+			else // < 10
+				result =  "0" + result;
+		} else { // e.g. "13", "145"
+			Integer num = toInt(value) + 1;
+			result = num.toString();
+		}
+		
+		return result;
 	}
 	protected Integer toInt(String value) {
 		return Integer.parseInt(value);
