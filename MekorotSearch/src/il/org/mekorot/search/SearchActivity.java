@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -185,11 +187,11 @@ public class SearchActivity extends Activity {
 		case R.id.book_delete_button:
 			bookView.setText("");
 			pathView.setText("");
-			bookView.requestFocus();
+			showSoftKeyboard(bookView);
 			break;
 		case R.id.path_delete_button:
 			pathView.setText("");
-			pathView.requestFocus();
+			showSoftKeyboard(pathView);
 			break;
 		}
 	}
@@ -222,6 +224,19 @@ public class SearchActivity extends Activity {
 		
 		if(children.length != 0)
 			updatePathAdapter(children);
+	}
+	/**
+	 * Takes a View in which the user should type something, calls requestFocus()
+	 * to give it focus, then showSoftInput() to open the input method.
+	 * From http://developer.android.com/training/keyboard-input/visibility.html
+	 * @param view
+	 */
+	public void showSoftKeyboard(View view) {
+	    if (view.requestFocus()) {
+	        InputMethodManager imm = (InputMethodManager)
+	                getSystemService(Context.INPUT_METHOD_SERVICE);
+	        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+	    }
 	}
 
 }
