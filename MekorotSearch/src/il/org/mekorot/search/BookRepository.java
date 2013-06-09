@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
@@ -15,6 +17,8 @@ public class BookRepository {
 	private static String MAP_FILE = "books.map";
 	private static final String BOOK_SUFFIX = ".book";
 	private static BookRepository instance;
+	private Map<String, Book> bookCache;
+	private static final int BOOK_CACHE_SIZE = 5;
 	private Context context;
 	private BooksMap booksMap;
 	
@@ -64,6 +68,7 @@ public class BookRepository {
 	private BookRepository(Context context) {
 		this.context = context;
 		booksMap = new BooksMap();
+		bookCache = new HashMap<String, Book>();
 	}
 	
 	public static BookRepository instance(Context context) {
@@ -81,11 +86,33 @@ public class BookRepository {
 	 * @return
 	 */
 	public Book getBook(String name) {
+		Book book = getBookFromCache(name);
+		if(book != null)
+			return book;
+		
 		String fileName = booksMap.getBookFileName(name);
 		if(fileName == null)
 			return null;
 		
-		return new Book(getBookInputStream(fileName), name);
+		book = new Book(getBookInputStream(fileName), name);
+		insertBookToCache(book);
+		return book;
+	}
+
+	private void insertBookToCache(Book book) {
+		// return if book already exists in cache
+		if(bookCache.get(book.getName()) != null)
+				return;
+		// insert if cache is less then maximal size
+		if(bookCache.size() < BOOK_CACHE_SIZE)
+			bookCache.put(book.getName(), book);
+		
+		// TODO: size = BOOK_CACHE_SIZE
+		// should decide element to remove...
+	}
+
+	private Book getBookFromCache(String name) {
+		return bookCache.get(name);
 	}
 
 	/**
