@@ -10,6 +10,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -56,6 +57,11 @@ public class SearchActivity extends Activity {
 		pathView = (MultiAutoCompleteTextView) findViewById(R.id.path);
         pathView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         addPathViewListeners();
+        
+        // see http://stackoverflow.com/questions/11427528/items-in-the-drop-down-list-of-autocompletetextview-are-not-visible-how-to-chan
+        pathView.getRootView().setBackgroundColor(getResources().getColor(android.R.color.white)); // note: changing the theme to holo (a dark theme) solved the problem in 2.4 but the background was black so changed manually to white. perhaps should do that from xml.
+        
+        
 	}
 
 	private void addPathViewListeners() {
