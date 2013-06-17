@@ -95,6 +95,7 @@ public class SearchActivity extends Activity {
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				boolean handled = false;
 		        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+		        	hideSoftKeyboard(v); // why? sometimes in our mini phone it remained opened in the browser.
 		            openBrowser();
 		            handled = true;
 		        }
@@ -175,6 +176,7 @@ public class SearchActivity extends Activity {
 	}
 	
 	public void searchButtonPressed(View view) {
+		hideSoftKeyboard(view); // why? sometimes in our mini phone it remained opened in the browser. 
 		openBrowser();
 	}
 	/**
@@ -242,6 +244,13 @@ public class SearchActivity extends Activity {
 	        InputMethodManager imm = (InputMethodManager)
 	                getSystemService(Context.INPUT_METHOD_SERVICE);
 	        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+	    }
+	}
+	public void hideSoftKeyboard(View view) {
+	    if (view.requestFocus()) {
+	        InputMethodManager imm = (InputMethodManager)
+	                getSystemService(Context.INPUT_METHOD_SERVICE);
+	        imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
 	    }
 	}
 
