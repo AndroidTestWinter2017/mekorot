@@ -42,6 +42,16 @@ public abstract class UrlProvider {
 		
 		return result;
 	}
+	/**
+	 * Gets a sequence in Hebrew and increments it, e.g.,
+	 * א => ב
+	 * קיא => קיב
+	 * @param seq
+	 * @return
+	 */
+	protected String incrementHebrew(String seq) {
+		return HebrewRange.incrementSequence(seq);
+	}
 	protected Integer toInt(String value) {
 		return Integer.parseInt(value);
 	}

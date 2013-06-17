@@ -7,6 +7,9 @@ import android.test.AndroidTestCase;
 import il.org.mekorot.search.HebrewRange;
 
 public class HebrewRangeTest extends AndroidTestCase {
+	public void test_arrays() {
+		assertEquals(699, HebrewRange.ALEPH_BET_NUMBERING_ARRAY.length);
+	}
 	public void test_aleph_bet_numbering() {
 		HebrewRange range = new HebrewRange("א", "ד");
 		String[] result = range.getRange();

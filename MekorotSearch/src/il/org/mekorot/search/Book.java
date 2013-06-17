@@ -3,6 +3,7 @@ package il.org.mekorot.search;
 import il.org.mekorot.search.bookurls.BavliUrlProvider;
 import il.org.mekorot.search.bookurls.MoreNevochimUrlProvider;
 import il.org.mekorot.search.bookurls.RambamUrlProvider;
+import il.org.mekorot.search.bookurls.ShulhanAruchUrlProvider;
 import il.org.mekorot.search.bookurls.TanachUrlProvider;
 
 import java.io.BufferedReader;
@@ -135,8 +136,10 @@ public class Book {
 			bookUrl = new BavliUrlProvider();
 		else if(name.equals("משנה תורה להרמב\"ם"))
 			bookUrl = new RambamUrlProvider();
-		else if(name.equals("מורה הנבוכים להרמב\"ם"))
+		else if(name.equals("מורה הנבוכים"))
 			bookUrl = new MoreNevochimUrlProvider();
+		else if(name.equals("שולחן ערוך"))
+			bookUrl = new ShulhanAruchUrlProvider();
 			
 		is = preprocesssBookFile(is);
 		

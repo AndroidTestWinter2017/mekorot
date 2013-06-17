@@ -12,10 +12,12 @@ public class BookRepositoryTest extends AndroidTestCase {
 	private Book bavliBook;
 	private Book rambamBook;
 	private Book nevochimBook;
+	private Book shulchanAruchBook;
 	private static final String TORAH_BOOK_NAME = "תנ\"ך";
 	private static final String BAVLI_BOOK_NAME = "תלמוד בבלי";
 	private static final String RAMBAM_BOOK_NAME = "משנה תורה להרמב\"ם";
-	private static final String NEVOCHIM_BOOK_NAME = "מורה הנבוכים להרמב\"ם";
+	private static final String NEVOCHIM_BOOK_NAME = "מורה הנבוכים";
+	private static final String SHULCHAN_ARUCH_BOOK_NAME = "שולחן ערוך";
 	
 	public void setUp() {
 		bookRepository = BookRepository.instance(getContext());
@@ -23,10 +25,11 @@ public class BookRepositoryTest extends AndroidTestCase {
 		bavliBook = bookRepository.getBook(BAVLI_BOOK_NAME);
 		rambamBook = bookRepository.getBook(RAMBAM_BOOK_NAME);
 		nevochimBook = bookRepository.getBook(NEVOCHIM_BOOK_NAME);
+		shulchanAruchBook = bookRepository.getBook(SHULCHAN_ARUCH_BOOK_NAME);
 	}
 	
 	public void test_getNumberOfBooks() {
-		assertEquals(4, bookRepository.getNumberOfBooks());
+		assertEquals(5, bookRepository.getNumberOfBooks());
 	}
 	public void test_getBook() {
 		// for a non-existing book we expect an empty book, i.e., with a name ""
@@ -73,8 +76,11 @@ public class BookRepositoryTest extends AndroidTestCase {
 				rambamBook.getUrl(new String[]{"משנה תורה להרמב\"ם", "מגלה וחנוכה", "פרק ד"}));
 		
 		assertEquals("http://press.tau.ac.il/perplexed/chapters/chap_2_08.htm",
-				nevochimBook.getUrl(new String[]{"מורה הנבוכים להרמב\"ם", "חלק שני", "פרק ח"}));
+				nevochimBook.getUrl(new String[]{"מורה הנבוכים", "חלק שני", "פרק ח"}));
 		assertEquals("http://press.tau.ac.il/perplexed/chapters/chap_3_00L.htm",
-				nevochimBook.getUrl(new String[]{"מורה הנבוכים להרמב\"ם", "חלק שלישי", "פרק הקדמה"}));
+				nevochimBook.getUrl(new String[]{"מורה הנבוכים", "חלק שלישי", "פרק הקדמה"}));
+		
+		assertEquals("http://he.wikisource.org/wiki/" + "שולחן_ערוך_אורח_חיים_א",
+				shulchanAruchBook.getUrl(new String[]{"שולחן ערוך", "אורח חיים", "סימן א"}));
 	}
 }
